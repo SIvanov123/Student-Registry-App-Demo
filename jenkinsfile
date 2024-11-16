@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
     stages {
         stage('Checkout') {
             steps {
@@ -24,20 +23,31 @@ pipeline {
         stage("Run app") {
             steps {
                 script {
-                    bat "start /B npm start"                       
-                                    
+                    if (isUnix()) {
+                        sh "npm start &"
+                    } else {
+                        bat "start /B npm start"
+                    }                
                 }
             }
         }
 
-        stage("Run test"){
-            bat "start npm test"  
+        stage("Run test") {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh "npm test"
+                    } else {
+                        bat "npm test"
+                    }
+                }
+            }
         }
     }
 
     post {
         always {
-            echo "CI pipeline completed"    
+            echo "CI pipeline completed"
         }
     }
 }
