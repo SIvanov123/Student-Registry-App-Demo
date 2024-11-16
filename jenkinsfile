@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     bat "start /B npm start"                       
-                    bat "wait-on http://localhost:8090"    
+                    bat "wait-on http://localhost:8080"    
                     bat "npm test"                         
                 }
             }
