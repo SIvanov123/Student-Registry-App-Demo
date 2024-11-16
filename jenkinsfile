@@ -31,9 +31,9 @@ pipeline {
         stage("Run app") {
             steps {
                 script {
-                    sh "npm start &"                       // Run the app in the background
-                    sh "wait-on http://localhost:8090"     // Wait for the app to be accessible
-                    sh "npm test"                          // Run tests after the app starts
+                    sh "npm start &"                       
+                    sh "wait-on http://localhost:8090"    
+                    sh "npm test"                         
                 }
             }
         }
